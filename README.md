@@ -1,34 +1,31 @@
-# eXolnet Homebrew Deprecated
+# cmodijk Homebrew Deprecated
 
 [![Software License](https://img.shields.io/badge/license-MIT-8469ad.svg?style=flat-square)](LICENSE)
 
-eXolnet's Homebrew tap for deprecated formulae.
+This is a fork of eXolnet's Homebrew tap for deprecated formulae but modified in a few way's.
+1. The packages are build with a older icu4c version
+1. The packages are build with a older openssl version
+1. I removed httpd support because i'm not using it and has a newer openssl version which conflicts 
+1. I remove php-fpm support because i'm not using it 
+
+Please don't use this package i'm only building this for personal use and i'm not responding to issues or pull requests. 
 
 ## Installation
 
 ```bash
-brew tap exolnet/homebrew-deprecated
+brew tap cmodijk/homebrew-deprecated
 ```
 
 ## Usage
 
 ```bash
-brew install <formula>
+brew install php@5.6
+brew install php@7.0
+brew install php@7.1
 ```
-
-See [Formula](Formula) directory for available formulae.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE_OF_CONDUCT.md) for details.
-
-## Security
-
-If you discover any security related issues, please email security@exolnet.com instead of using the issue tracker.
 
 ## Credits
 
-- [Patrick Gagnon-Renaud](https://github.com/pgrenaud)
 - [All Contributors](../../contributors)
 
 ## License

@@ -10,8 +10,9 @@ class OpensslAT102 < Formula
   sha256 "14cb464efe7ac6b54799b34456bd69558a749a4931ecfd9cf9f71d7881cac7bc"
 
   bottle do
-    root_url "https://dl.bintray.com/cmodijk/bottles"
-    sha256 "b643cad1ab2385c862ed1762d408e742c21c66d5fe830799478ed9b56e9cf366" => :mojave
+    root_url "https://bottles.jcid.nl"
+    rebuild 1
+    sha256 "1613613d085b9e584902da2edfeee730faf97b867ab9f0ecd7aa4e423f73ca03" => :mojave
   end
 
   keg_only :provided_by_macos,

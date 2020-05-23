@@ -6,9 +6,10 @@ class Icu4cAT642 < Formula
   sha256 "627d5d8478e6d96fc8c90fed4851239079a561a6a8b9e48b0892f24e82d31d6c"
 
   bottle do
-    root_url "https://dl.bintray.com/cmodijk/bottles"
+    root_url "https://bottles.jcid.nl"
     cellar :any
-    sha256 "da077eb88fb4fc44541301854a53f3eaf4817d060bbfe2f41c53fff4020e50f1" => :mojave
+    rebuild 1
+    sha256 "3f446ec96d06f39d0ff4159baf2c8f33bc88d52b75622f8afbd12313e257c883" => :mojave
   end
 
   keg_only :provided_by_macos, "macOS provides libicucore.dylib (but nothing else)"
