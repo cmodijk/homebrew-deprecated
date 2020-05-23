@@ -50,8 +50,6 @@ class PhpAT56 < Formula
     # buildconf required due to system library linking bug patch
     system "./buildconf", "--force"
 
-    inreplace "sapi/fpm/php-fpm.conf.in", ";daemonize = yes", "daemonize = no"
-
     # API compatibility with tidy-html5 v5.0.0 - https://github.com/htacg/tidy-html5/issues/224
     inreplace "ext/tidy/tidy.c", "buffio.h", "tidybuffio.h"
 
@@ -84,7 +82,6 @@ class PhpAT56 < Formula
       --enable-dba
       --enable-exif
       --enable-ftp
-      --enable-fpm
       --enable-intl
       --enable-mbregex
       --enable-mbstring
@@ -101,8 +98,6 @@ class PhpAT56 < Formula
       --enable-zip
       --with-bz2#{headers_path}
       --with-curl=#{Formula["curl-openssl"].opt_prefix}
-      --with-fpm-user=_www
-      --with-fpm-group=_www
       --with-freetype-dir=#{Formula["freetype"].opt_prefix}
       --with-gd
       --with-gettext=#{Formula["gettext"].opt_prefix}
@@ -154,18 +149,12 @@ class PhpAT56 < Formula
 
     config_files = {
       "php.ini-development"   => "php.ini",
-      "sapi/fpm/php-fpm.conf" => "php-fpm.conf",
     }
     config_files.each_value do |dst|
       dst_default = config_path/"#{dst}.default"
       rm dst_default if dst_default.exist?
     end
     config_path.install config_files
-
-    unless (var/"log/php-fpm.log").exist?
-      (var/"log").mkpath
-      touch var/"log/php-fpm.log"
-    end
   end
 
   def post_install
@@ -235,33 +224,6 @@ class PhpAT56 < Formula
 
   def php_version
     version.to_s.split(".")[0..1].join(".")
-  end
-
-  plist_options :manual => "php-fpm"
-
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-      <dict>
-        <key>KeepAlive</key>
-        <true/>
-        <key>Label</key>
-        <string>#{plist_name}</string>
-        <key>ProgramArguments</key>
-        <array>
-          <string>#{opt_sbin}/php-fpm</string>
-          <string>--nodaemonize</string>
-        </array>
-        <key>RunAtLoad</key>
-        <true/>
-        <key>WorkingDirectory</key>
-        <string>#{var}</string>
-        <key>StandardErrorPath</key>
-        <string>#{var}/log/php-fpm.log</string>
-      </dict>
-    </plist>
-  EOS
   end
 end
 
